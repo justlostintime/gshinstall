@@ -1,0 +1,14 @@
+' Gambas class file
+
+Static Public Sub _call()
+
+For Each sfile As String In Main.FileList
+  Dim fileName As String = sFile & "_" & Main.Versions[sFile] & "_all.deb"
+  Print "debian apt is Installing "; sFile;; "As";; filename
+  Try Kill "/tmp" &/ FileName
+  Copy "." &/ FileName To "/tmp" &/ FileName
+  Exec ["apt", "install", "/tmp" &/ FileName] Wait
+  If Process.LastValue <> 0 Then Error.Raise(sFile & " install failed :" & Process.LastValue)
+Next
+
+End

@@ -1,0 +1,18 @@
+' Gambas class file
+
+Static Public Sub _call()
+
+Dim cmd As String = IIf(System.Exist("yum"), "yum", "dnf")
+
+For Each sfile As String In Main.FileList
+  Dim fileName As String = sFile & "-" & Main.Versions[sFile] & ".fdr.noarch.rpm"
+  Print "RPM isInstalling "; sFile;; "As";; filename
+  Try Kill "/tmp" &/ FileName
+  Copy "." &/ FileName To "/tmp" &/ FileName
+  Exec [cmd, "install", "/tmp" &/ FileName] Wait
+  If Process.LastValue <> 0 Then Error.Raise(sFile & " install failed :" & Process.LastValue)
+Next
+
+End
+
+

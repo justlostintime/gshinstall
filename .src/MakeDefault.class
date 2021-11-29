@@ -1,0 +1,36 @@
+' Gambas class file
+
+Static Private username As String
+
+Static Public Sub _call()
+  Dim answer As String = ""
+  Shell "id -un" To username
+  username = Trim(username)
+  Print Quote(Username);; ": Would you like to make gsh to your default SHELL(N/y)?";
+  Flush 
+  Line Input answer
+  
+  Select Case Upper(Trim(answer & "N"))[0]
+    Case "Y"
+      'doSetDefault()
+      Print "\n\nExecute the following command\nchsh -s /usr/bin/gsh\nYou will be prompted for your password."
+      Print "You will have to log off and back on to have this take effect"
+      
+    Case Else
+      Return
+      
+  End Select
+    
+End
+
+Static Sub DoSetDefault()
+Dim shells As String = File.Load("/etc/shells")
+If shells Like "*/usr/bin/gsh*" Then 
+ Dim cmd As String = "chsh " & username & " -s /usr/bin/gsh"
+ Print cmd
+ Shell cmd Wait 
+Else 
+  Print "\n/usr/bin/gsh is not one of the available shells!!\nDid you remember to install gsh and add it to the available shells"
+Endif
+
+End

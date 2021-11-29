@@ -1,0 +1,44 @@
+' Gambas class file
+
+'' return true if the daily was installed and the app restarted with the latest version
+'' If return true then the main should just exit
+
+Static Public Sub _Call() As Boolean 
+Dim answer As String = ""
+If CInt(Split(System.FullVersion, ".")[1]) < 16 Then
+  
+  Print "Your version of Gambas is not the most current 3.16"
+  Print "If you have not updated your system lately then abort and run"
+  Print "sudo apt update"
+  Print "sudo apt upgrade"
+  Print "Then restart the gshinstall process and enter Y to this question"
+  Print "Would you like to install the version from the gambas teams PPA?(Y/n/a";
+  Line Input answer
+  Select Case Upper(Trim(answer & "Y"))[0]
+    Case "Y"
+      Return DoInstall()
+      
+    Case "A"
+      Quit 2
+      
+    Case Else 
+      Return False
+      
+  End Select
+   
+Endif
+  Return False
+  
+End
+
+Static Sub DoInstall() As Boolean
+  
+  Exec ["apt", "add-apt-repository", "ppa:gambas-team/gambas-daily"] Wait 
+  If Process.LastValue = 0 Then Exec ["apt", "update"] Wait
+  If Process.LastValue = 0 Then Exec ["apt", "upgrade"] Wait
+  
+  If Process.LastValue = 0 Then Exec ["gshinstall"] Wait 
+  If Process.lastvalue = 0 Then Return True
+  Return False
+  
+End

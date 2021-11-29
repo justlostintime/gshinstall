@@ -1,0 +1,7 @@
+' Gambas test file
+
+Public Sub testdefaults()
+  
+  MakeDefault()
+  
+End

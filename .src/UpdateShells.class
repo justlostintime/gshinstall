@@ -1,0 +1,33 @@
+' Gambas class file
+
+Static Public Sub _call()
+  Dim answer As String = ""
+  Print "\n*******************************************\nWould you like to add gsh to your /etc/shells\n"
+        "This will allow you to make gsh available as one of the possible default shell choices\n"
+        "This will not make gsh your default shell\n"
+        "Update /etc/Shells(Y/n)";
+  Flush
+  Line Input answer
+  
+  Select Case Upper(Trim(answer & "Y"))[0]
+    Case "Y"
+      doInsert()
+      
+    Case Else
+      Return
+      
+  End Select
+    
+End
+
+Static Sub DoInsert()
+Dim shells As String = File.Load("/etc/shells")
+
+If InStr(shells, "/usr/bin/gsh") = 0 Then 
+ Shell "echo /usr/bin/gsh >> /etc/shells" Wait 
+ 
+Endif
+  
+  
+  
+End
