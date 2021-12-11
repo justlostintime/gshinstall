@@ -2,8 +2,8 @@
 Title=Install gsh and dependencies
 Startup=Main
 UseTerminal=1
-Version=1.0.32
-Description="Installs gambas shell for\n ubutu/mint...\n fedora/redhat\n suse/opensuse\n debian/..."
+Version=1.0.34
+Description="Installs gambas shell for\n ubuntu/mint...\n fedora/redhat\n suse/opensuse\n debian/..."
 Authors="Brian G"
 TabSize=2
 Language=en_US
