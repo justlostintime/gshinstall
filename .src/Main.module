@@ -1,11 +1,11 @@
 ' Gambas module file
 
-OsInfo As Collection = ["ID_LIKE": "ubuntu"]          ' default to ubuntu install
-Public Versions As New Collection                     ' List of versions to use
+OsInfo As Collection                                 ' default to ubuntu install
+Public Versions As New Collection                    ' List of versions to use
 Public FileList As New String[]                      ' List of files in order to install
 
 Public Sub Main()
-
+  OsInfo = New Collection(gb.ignorecase) 
   GetOsInfo()
   GetVersions()
   GetFileList()
@@ -13,15 +13,14 @@ Public Sub Main()
   If User.Name <> "root" Then
       Error.Raise("\nThis Application must be executed with sudo\nas it installs the Gambas shell Shell and all dependencies")
   Endif
-  
-  If InstallGambasDaily() Then 
-    Quit 0
-  Endif
-  
-  Print "Installing for "; OsInfo["PRETTY_NAME"]
-  
-  Select Case Upper(IIf(OsInfo.Exist("ID_LIKE"), OsInfo["ID_LIKE"], OsInfo["ID"]))
+
+  Print "Installing for "; IIf(OsInfo.Exist("PRETTY_NAME"), OsInfo["PRETTY_NAME"], OsInfo["ID"])
+  Dim OSused As String = Upper(IIf(OsInfo.Exist("ID_LIKE"), OsInfo["ID_LIKE"], OsInfo["ID"]))
+  Select Case OSused
     Case "UBUNTU"
+      If InstallGambasDaily() Then 
+        Quit 0
+      Endif
       InstallUbuntu()
       
     Case "DEBIAN"
@@ -32,6 +31,9 @@ Public Sub Main()
       
     Case "FEDORA"
       InstallFedora()
+      
+    Case Else 
+      Print OSused;; "Is not supported for auto install at this time"
       
   End Select
   

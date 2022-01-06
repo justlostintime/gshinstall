@@ -1,3 +1,12 @@
+* Thu Jan 06 2022 Brian g <justlostintime@gmail.com> 1.0.45
+- Updated to correctly handle a number of differing environments
+
+* Mon Jan 03 2022 Brian g <justlostintime@gmail.com> 1.0.44
+- Update debian depends
+
+* Mon Jan 03 2022 Brian g <justlostintime@gmail.com> 1.0.44
+- Add required software for each distribution
+
 * Tue Dec 28 2021 Brian g <justlostintime@gmail.com> 1.0.44
 
 * Tue Dec 28 2021 Brian g <justlostintime@gmail.com> 1.0.42
