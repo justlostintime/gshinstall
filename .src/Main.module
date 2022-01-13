@@ -5,82 +5,88 @@ Public Versions As New Collection                    ' List of versions to use
 Public FileList As New String[]                      ' List of files in order to install
 
 Public Sub Main()
-  OsInfo = New Collection(gb.ignorecase) 
+
+  OsInfo = New Collection(gb.ignorecase)
   GetOsInfo()
   GetVersions()
   GetFileList()
-  
+
   If User.Name <> "root" Then
-      Error.Raise("\nThis Application must be executed with sudo\nas it installs the Gambas shell Shell and all dependencies")
+    Error.Raise("\nThis Application must be executed with sudo\nas it installs the Gambas shell Shell and all dependencies")
   Endif
 
   Print "Installing for "; IIf(OsInfo.Exist("PRETTY_NAME"), OsInfo["PRETTY_NAME"], OsInfo["ID"])
   Dim OSused As String = Upper(IIf(OsInfo.Exist("ID_LIKE"), OsInfo["ID_LIKE"], OsInfo["ID"]))
   Select Case OSused
     Case "UBUNTU"
-      If InstallGambasDaily() Then 
+      If InstallGambasDaily() Then
         Quit 0
       Endif
       InstallUbuntu()
-      
+
     Case "DEBIAN"
       InstallDebian()
-      
+
     Case "SUSE"
       InstallSUSE()
-      
+
     Case "FEDORA"
       InstallFedora()
-      
-    Case Else 
+
+    Case Else
       Print OSused;; "Is not supported for auto install at this time"
-      
+
   End Select
-  
+
   UpdateShells()
   MakeDefault()
-  
-  Catch 
-    Error "gsh Install failed with error:";; Error.text
+
+Catch
+  Error "gsh Install failed with error:";; Error.text
 
 End
 
 Sub GetOsInfo()
-  
+
   Dim source As String = File.Load("/etc/os-release")
   Dim slines As String[] = Split(source, "\n", "\"\"", True, True)
+
   For Each pLine As String In slines
     pline = Trim(pline)
-    If pline <> "" And If pline[0] <> ";" Then 
+    If pline <> "" And If pline[0] <> ";" Then
       Dim info As String[] = Split(pline, "=", "\"\"", True, False)
       If info.count > 1 Then OsInfo.add(Trim(info[1]), Trim(info[0]))
     Endif
   Next
-  
+
 End
 
 Sub GetVersions()
-  
-  Dim source As String[] = Split(File.Load("Version"), "\n", "\"\"", True, True) 
+
+  Dim source As String[] = Split(File.Load("Version"), "\n", "\"\"", True, True)
+
   For Each ver As String In source
     ver = Trim(ver)
     If ver <> "" And If ver[0] <> ";" Then
-        Dim item As String[] = Split(ver, "=", "\"\"", True, False)
-        If item.count > 1 Then Versions.Add(Trim(item[1]), Trim(item[0]))
+      Dim item As String[] = Split(ver, "=", "\"\"", True, False)
+      If item.count > 1 Then Versions.Add(Trim(item[1]), Trim(item[0]))
     Endif
   Next
-  
+
 End
 
 Sub GetFileList()
+
   Dim templist As String[] = Split(File.Load("FileList"), "\n", "\"\"", True, False)
+
   FileList = New String[]
   For Each entry As String In templist
     entry = Trim(entry)
-    If entry <> "" And If entry[0] <> ";" Then 
+    If entry <> "" And If entry[0] <> ";" Then
       FileList.Add(entry)
     Endif
   Next
+
 End
 
 
