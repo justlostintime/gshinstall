@@ -3,16 +3,16 @@
 Static Public Sub _call()
 
 
-For Each sfile As String In Main.FileList
- 
-  Dim sver As String[] = Split(Main.Versions[sfile], "-")
-  Dim fileName As String = sFile & "_" & sver[0] & "-0ubuntu" & sver[1] & "_all.deb"
-  Print "Ubuntu is Installing "; sFile;; "As";; filename
-  Flush 
-  Try Kill "/tmp" &/ FileName
-  Copy "." &/ FileName To "/tmp" &/ FileName
-  Exec ["apt", "install", "/tmp" &/ FileName] Wait
-  If Process.LastValue <> 0 Then Error.Raise(FileName & " install failed :" & Process.LastValue)
-Next
+  For Each sfile As String In Main.FileList
+
+    Dim sver As String[] = Split(Main.Versions[sfile], "-")
+    Dim fileName As String = sFile & "_" & sver[0] & "-0ubuntu" & sver[1] & "_all.deb"
+    Print "Ubuntu is Installing "; sFile;; "As";; filename
+    Flush
+    Try Kill "/tmp" &/ FileName
+    Copy "." &/ FileName To "/tmp" &/ FileName
+    Exec ["apt", "install", "/tmp" &/ FileName] Wait
+    If Process.LastValue <> 0 Then Error.Raise(FileName & " install failed :" & Process.LastValue)
+  Next
 
 End
