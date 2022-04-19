@@ -1,7 +1,7 @@
 # Gambas Project File 3.0
 Title=Install gsh and dependencies
 Startup=Main
-Version=1.0.48
+Version=1.0.49
 Description="Installs gambas shell for\n ubuntu/mint...\n fedora/redhat\n suse/opensuse\n debian/..."
 Authors="Brian G"
 TabSize=2
@@ -10,7 +10,7 @@ Maintainer=Brian g
 Vendor=Westwood
 Address=justlostintime@gmail.com
 License=General Public License
-PackageName=gshinstall-1.0.48
+PackageName=gshinstall-1.0.49
 CreateEachDirectory=1
 Packager=1
 Systems=debian,fedora,suse,ubuntu
