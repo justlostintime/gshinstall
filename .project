@@ -9,6 +9,7 @@ Language=en_US
 Maintainer=Brian g
 Vendor=Westwood
 Address=justlostintime@gmail.com
+Url=https://github.com/justlostintime
 License=General Public License
 PackageName=gshinstall-1.0.49
 CreateEachDirectory=1
