@@ -7,14 +7,14 @@ Static Public Sub _Call() As Boolean
 
   Dim answer As String = ""
 
-  If CInt(Split(System.FullVersion, ".")[1]) < 16 Then
+  If CInt(Split(System.FullVersion, ".")[1]) < 17 Then
 
-    Print "Your version of Gambas is not the most current 3.16"
+    Print "Your version of Gambas is not the most current 3.17"
     Print "If you have not updated your system lately then abort and run"
     Print "sudo apt update"
     Print "sudo apt upgrade"
     Print "Then restart the gshinstall process and enter Y to this question"
-    Print "Would you like to install the version from the gambas teams PPA?(Y/n/a";
+    Print "Would you like to install the version from the gambas teams PPA?(Y/n/a)";
     Line Input answer
     Select Case Upper(Trim(answer & "Y"))[0]
       Case "Y"

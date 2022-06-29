@@ -2,16 +2,16 @@
 
 Static Public Sub _call()
 
-Dim cmd As String = "zypper"
+  Dim cmd As String = "zypper"
 
-For Each sfile As String In Main.FileList
+  For Each sfile As String In Main.FileList
 
-  Dim fileName As String = sFile & "-" & Main.Versions[sFile] & ".suse.noarch.rpm"
-  Print "SuSE is Installing "; sFile;; "As";; filename
-  Try Kill "/tmp" &/ FileName
-  Copy "." &/ FileName To "/tmp" &/ FileName
-  Exec [cmd, "install", "/tmp" &/ FileName] Wait
-  If Process.LastValue <> 0 Then Error.Raise(sFile & " install failed :" & Process.LastValue)
-Next
+    Dim fileName As String = sFile & "-" & Main.Versions[sFile] & ".suse.noarch.rpm"
+    Print "SuSE is Installing "; sFile;; "As";; filename
+    Try Kill "/tmp" &/ FileName
+    Copy "." &/ FileName To "/tmp" &/ FileName
+    Exec [cmd, "install", "/tmp" &/ FileName] Wait
+    If Process.LastValue <> 0 Then Error.Raise(sFile & " install failed :" & Process.LastValue)
+  Next
 
 End
